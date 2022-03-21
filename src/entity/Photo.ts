@@ -23,6 +23,6 @@ export class Photo {
   @Column()
   isPublished: boolean;
 
-  @ManyToOne((type) => User, (author) => author.photos)
+  @ManyToOne((type) => User, (user) => user.photos)
   user: User;
 }

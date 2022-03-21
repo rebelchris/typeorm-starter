@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import { Photo } from './entity/Photo';
 import { User } from './entity/User';
+import {PublishedPhoto} from "./entity/PublishedPhoto";
 const fastify = require('fastify')({ logger: true });
 
 createConnection()
@@ -38,6 +39,11 @@ createConnection()
         relations: ['photos'],
       });
       return { users };
+    });
+
+    fastify.get('/photos', async (request, reply) => {
+      const photos = await connection.manager.find(PublishedPhoto);
+      return { photos };
     });
 
     const start = async () => {
